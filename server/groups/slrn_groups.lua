@@ -1,4 +1,6 @@
-local groups = {}
+if Config.Groups ~= "slrn_groups" then return end
+
+fzd.groups = {}
 
 lib.callback.register("fzd_lib:isInGroup", function()
   local group = exports.slrn_groups:GetGroupByMembers(source)
@@ -36,37 +38,35 @@ lib.callback.register("fzd_lib:getCurrentStage", function()
   return currentStage
 end)
 
-function groups.getGroupByMember(member)
+function fzd.groups.getGroupByMember(member)
   return exports.slrn_groups:GetGroupByMembers(member)
 end
 
-function groups.getGroupMembers(group)
+function fzd.groups.getGroupMembers(group)
   return exports.slrn_groups:getGroupMembers(group)
 end
 
-function groups.setJobStatus(group, job, status)
+function fzd.groups.setJobStatus(group, job, status)
   exports.slrn_groups:setJobStatus(group, job, status)
 end
 
-function groups.getGroupStages(group)
+function fzd.groups.getGroupStages(group)
   return exports.slrn_groups:GetGroupStages(group)
 end
 
-function groups.createBlipForGroup(group, name, blip)
+function fzd.groups.createBlipForGroup(group, name, blip)
   print("slrn_groups")
   exports.slrn_groups:CreateBlipForGroup(group, name, blip)
 end
 
-function groups.removeBlipForGroup(group, name)
+function fzd.groups.removeBlipForGroup(group, name)
   exports.slrn_groups:RemoveBlipForGroup(group, name)
 end
 
-function groups.notifyGroup(group, message, type)
+function fzd.groups.notifyGroup(group, message, type)
   exports.slrn_groups:NotifyGroup(group, message, type)
 end
 
-function groups.pNotifyGroup(group, title, message)
+function fzd.groups.pNotifyGroup(group, title, message)
   exports.slrn_groups:pNotifyGroup(group, title, message)
 end
-
-return groups

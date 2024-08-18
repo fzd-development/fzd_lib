@@ -1,9 +1,9 @@
-local config = require "config.shared"
+if Config.VehicleKeys ~= "default" then return end
 
-local vehiclekeys = {}
+fzd.vehiclekeys = {}
 
-function vehiclekeys.isVehicleLocked(vehicle)
-  if config.framework == "qbcore" or config.framework == "esx" then
+function fzd.vehiclekeys.isVehicleLocked(vehicle)
+  if Config.Framework == "qbcore" or Config.Framework == "esx" then
     local lockedStatus = GetVehicleDoorLockStatus(vehicle)
 
     if lockedStatus == 1 or lockedStatus == 0 then
@@ -15,18 +15,16 @@ function vehiclekeys.isVehicleLocked(vehicle)
     end
   end
 
-  if config.framework == "nd_core" then
+  if Config.Framework == "nd_core" then
     lockedStatus = lib.callback.await("fzd_lib:isVehicleLocked", vehicle)
     return lockedStatus
   end
 end
 
-function vehiclekeys.giveVehicleKeys(vehicle, plate)
+function fzd.vehiclekeys.giveVehicleKeys(vehicle, plate)
   TriggerServerEvent("qb-vehiclekeys:server:AcquireVehicleKeys", plate)
 
-  if config.framework == "nd_core" then
+  if Config.Framework == "nd_core" then
     TriggerServerEvent("fzd_lib:giveVehicleKeys", NetworkGetNetworkIdFromEntity(vehicle))
   end
 end
-
-return vehiclekeys

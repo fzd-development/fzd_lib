@@ -1,14 +1,16 @@
-local bridge = {}
+if Config.Framework ~= "qb-core" then return end
+
+fzd.bridge = {}
 
 local QBCore = exports['qb-core']:GetCoreObject()
 
 local Player = {}
 
-function bridge.getPlayerIdentifier()
+function fzd.bridge.getPlayerIdentifier()
   return Player and Player.identifier
 end
 
-function bridge.sendNotification(payload)
+function fzd.bridge.sendNotification(payload)
   if payload.type == "inform" then
     payload.type = "primary"
   end
@@ -46,5 +48,3 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
   Player = table.wipe(Player)
   TriggerEvent("fzd_lib:client:playerUnloaded")
 end)
-
-return bridge

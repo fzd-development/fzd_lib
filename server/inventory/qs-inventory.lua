@@ -1,26 +1,28 @@
-local inventory = {}
+if Config.Inventory ~= "qs-inventory" then return end
 
-function inventory.getItemCount(src, item)
+fzd.inventory = {}
+
+function fzd.inventory.getItemCount(src, item)
   return exports['qs-inventory']:GetItemTotalAmount(src, item)
 end
 
-function inventory.hasItem(src, item)
-  return inventory.getItemCount(src, item) > 0
+function fzd.inventory.hasItem(src, item)
+  return fzd.inventory.getItemCount(src, item) > 0
 end
 
-function inventory.hasInventorySpace(src, item, count)
+function fzd.inventory.hasInventorySpace(src, item, count)
   return exports['qs-inventory']:CanCarryItem(src, item, count)
 end
 
-function inventory.addItem(src, item, count)
+function fzd.inventory.addItem(src, item, count)
   return exports['qs-inventory']:AddItem(src, item, count)
 end
 
-function inventory.removeItem(src, item, count)
+function fzd.inventory.removeItem(src, item, count)
   return exports['qs-inventory']:RemoveItem(src, item, count)
 end
 
-function inventory.createCustomDrop(src, name, items, coords, slots, maxW, instance, model)
+function fzd.inventory.createCustomDrop(src, name, items, coords, slots, maxW, instance, model)
   local identifier = name.gsub(" ", "_"):lower()
 
   exports['qs-inventory']:RegisterStash(src, identifier, slots, maxW)
@@ -30,5 +32,3 @@ function inventory.createCustomDrop(src, name, items, coords, slots, maxW, insta
     exports['qs-inventory']:AddItemIntoStash(identifier, item[1], item[2], nil, nil, slots, maxW)
   end
 end
-
-return inventory

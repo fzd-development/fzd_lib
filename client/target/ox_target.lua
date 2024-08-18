@@ -1,15 +1,15 @@
-local target = {}
+if Config.Target ~= "ox_target" then return end
 
-function target.addLocalEntity(entity, payload)
+fzd.target = {}
+
+function fzd.target.addLocalEntity(entity, payload)
   exports.ox_target:addLocalEntity(entity, payload)
 end
 
-function target.removeLocalEntity(entity, payload)
+function fzd.target.removeLocalEntity(entity, payload)
   exports.ox_target:removeLocalEntity(entity, payload)
 end
 
-function target.disableTargeting(boolean)
+function fzd.target.disableTargeting(boolean)
   exports.ox_target:disableTargeting(boolean)
 end
-
-return target

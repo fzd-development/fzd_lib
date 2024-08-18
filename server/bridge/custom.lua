@@ -1,36 +1,42 @@
-local bridge = {}
+if Config.Framework ~= "custom" then return end
+
+fzd.bridge = {}
 
 local Players = {}
 
-function bridge.getJob(src)
+function fzd.bridge.getJob(src)
 
 end
 
-function bridge.hasJob(src, job, grade)
+function fzd.bridge.hasJob(src, job, grade)
 
 end
 
-function bridge.getPlayer(src)
+function fzd.bridge.getPlayer(src)
 
 end
 
-function bridge.getPlayerIdentifier(src)
+function fzd.bridge.getPlayerFromIdentifier(identifier)
 
 end
 
-function bridge.getFullName(src)
+function fzd.bridge.getPlayerIdentifier(src)
 
 end
 
-function bridge.getMoney(src, type)
+function fzd.bridge.getFullName(src)
 
 end
 
-function bridge.addMoney(src, amount, type, reason)
+function fzd.bridge.getMoney(src, type)
 
 end
 
-function bridge.removeMoney(src, amount, type, reason)
+function fzd.bridge.addMoney(src, amount, type, reason)
+
+end
+
+function fzd.bridge.removeMoney(src, amount, type, reason)
 
 end
 
@@ -56,5 +62,3 @@ AddEventHandler('playerDropped', function()
     Players[source] = nil
   end
 end)
-
-return bridge

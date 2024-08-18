@@ -1,6 +1,8 @@
-local groups = {}
+if Config.Groups ~= "yseries" then return end
 
-function groups.isInGroup()
+fzd.groups = {}
+
+function fzd.groups.isInGroup()
   local inGroup = exports["yseries"]:GetGroupId()
 
   if inGroup == 0 then
@@ -10,7 +12,7 @@ function groups.isInGroup()
   return true
 end
 
-function groups.isGroupLeader()
+function fzd.groups.isGroupLeader()
   local isLeader = exports["yseries"]:IsGroupLeader()
 
   if not isLeader then
@@ -20,8 +22,6 @@ function groups.isGroupLeader()
   return true
 end
 
-function groups.getCurrentStage()
+function fzd.groups.getCurrentStage()
   return lib.callback.await("fzd_lib:getCurrentStage", false)
 end
-
-return groups

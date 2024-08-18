@@ -1,15 +1,15 @@
-local groups = {}
+if Config.Groups ~= "custom" then return end
 
-function groups.isInGroup()
+fzd.groups = {}
 
-end
-
-function groups.isGroupLeader()
+function fzd.groups.isInGroup()
 
 end
 
-function groups.getCurrentStage()
+function fzd.groups.isGroupLeader()
 
 end
 
-return groups
+function fzd.groups.getCurrentStage()
+
+end

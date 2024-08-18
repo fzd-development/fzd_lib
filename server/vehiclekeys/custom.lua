@@ -1,3 +1,3 @@
-local vehiclekeys = {}
+if Config.VehicleKeys ~= "custom" then return end
 
-return vehiclekeys
+fzd.vehiclekeys = {}

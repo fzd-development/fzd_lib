@@ -1,11 +1,11 @@
-local notification = {}
+if Config.Notification ~= "custom" then return end
 
-function notification.send(payload)
+fzd.notification = {}
+
+function fzd.notification.send(payload)
   if not payload.title or not payload.description then
     return
   end
 
   -- add code here
 end
-
-return notification

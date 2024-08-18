@@ -1,3 +1,3 @@
-local vehiclekeys = {}
+if Config.VehicleKeys ~= "renewed" then return end
 
-return vehiclekeys
+fzd.vehiclekeys = {}

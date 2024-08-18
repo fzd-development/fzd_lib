@@ -1,27 +1,27 @@
-local inventory = {}
+if Config.Inventory ~= "custom" then return end
 
-function inventory.getItemCount(src, item)
+fzd.inventory = {}
 
-end
-
-function inventory.hasItem(src, item)
+function fzd.inventory.getItemCount(src, item)
 
 end
 
-function inventory.hasInventorySpace(src, item, count)
+function fzd.inventory.hasItem(src, item)
 
 end
 
-function inventory.addItem(src, item, count)
+function fzd.inventory.hasInventorySpace(src, item, count)
 
 end
 
-function inventory.removeItem(src, item, count)
+function fzd.inventory.addItem(src, item, count)
 
 end
 
-function inventory.createCustomDrop(name, items, coords, slots, maxW, instance, model)
+function fzd.inventory.removeItem(src, item, count)
 
 end
 
-return inventory
+function fzd.inventory.createCustomDrop(name, items, coords, slots, maxW, instance, model)
+
+end

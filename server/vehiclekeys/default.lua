@@ -1,6 +1,6 @@
-local config = require "config.shared"
+if Config.VehicleKeys ~= "default" then return end
 
-local vehiclekeys = {}
+fzd.vehiclekeys = {}
 
 lib.callback.register("fzd_lib:isVehicleLocked", function(vehicle)
   local vehicle = NDCore.getVehicle(vehicle)
@@ -9,12 +9,10 @@ end)
 
 RegisterNetEvent("fzd_lib:giveVehicleKeys", function(vehicle)
   local vehicle = NetworkGetEntityFromNetworkId(vehicle)
-  
-  if config.framework == "nd_core" then
+
+  if Config.Framework == "nd_core" then
     local state = Entity(vehicle).state
     state.hotwired = true
     state.locked = false
   end
 end)
-
-return vehiclekeys

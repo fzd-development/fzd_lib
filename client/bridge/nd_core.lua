@@ -1,12 +1,14 @@
-local bridge = {}
+if Config.Framework ~= "nd_core" then return end
+
+fzd.bridge = {}
 
 local Player = {}
 
-function bridge.getPlayerIdentifier()
+function fzd.bridge.getPlayerIdentifier()
   return Player and Player.identifier
 end
 
-function bridge.sendNotification(payload)
+function fzd.bridge.sendNotification(payload)
   if payload.type == "inform" then
     payload.type = "primary"
   end
@@ -46,5 +48,3 @@ RegisterNetEvent('ND:characterUnloaded', function(character)
   Player = table.wipe(Player)
   TriggerEvent("fzd_lib:client:playerUnloaded")
 end)
-
-return bridge

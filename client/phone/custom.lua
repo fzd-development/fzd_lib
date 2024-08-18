@@ -1,7 +1,7 @@
-local phone = {}
+if Config.Phone ~= "custom" then return end
 
-function phone.notifaction(app, title, message)
+fzd.phone = {}
+
+function fzd.phone.notifaction(app, title, message)
 
 end
-
-return phone

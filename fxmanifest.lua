@@ -2,7 +2,7 @@ fx_version "cerulean"
 
 description "fzd_lib"
 author ".fuzzed"
-version '1.0.0'
+version '1.1.0'
 
 lua54 'yes'
 
@@ -13,6 +13,7 @@ server_script "server/import.lua"
 
 shared_scripts {
   "@ox_lib/init.lua",
+  "config/shared.lua"
 
   -- UNCOMMENT THIS IF YOU WANT TO USE QBX CORE
   -- "@qbx_core/modules/playerdata.lua",
@@ -23,6 +24,5 @@ shared_scripts {
 }
 
 files {
-  "client/**/*",
-  'config/shared.lua',
+  "client/**/*"
 }

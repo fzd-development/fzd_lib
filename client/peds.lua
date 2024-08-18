@@ -1,7 +1,5 @@
-local config = require "config.shared"
-local target = require (("client.target.%s"):format(config.target))
 
-local peds = {}
+fzd.peds = {}
 local storage = {}
 
 local function spawnPed(payload)
@@ -36,7 +34,7 @@ local function spawnPed(payload)
   end
 
   if payload.target then
-    target.addLocalEntity(ped, payload.target)
+    fzd.target.addLocalEntity(ped, payload.target)
   end
 
   SetModelAsNoLongerNeeded(payload.model)
@@ -44,7 +42,7 @@ local function spawnPed(payload)
   return ped
 end
 
-function peds.addPed(payload)
+function fzd.peds.addPed(payload)
   payload = table.type(payload) == "array" and payload or { payload }
 
   local pedSize = #storage
@@ -60,6 +58,17 @@ function peds.addPed(payload)
       end
 
       ped.resource = resource
+
+      if payload.blip then
+        ped.blip = AddBlipForEntity(ped.spawned)
+        SetBlipSprite(ped.blip, payload.blip.sprite)
+        SetBlipColour(ped.blip, payload.blip.color)
+        SetBlipScale(ped.blip, payload.blip.scale)
+        SetBlipAsShortRange(ped.blip, true)
+        BeginTextCommandSetBlipName("STRING")
+        AddTextComponentString(payload.blip.name)
+        EndTextCommandSetBlipName(ped.blip)
+      end
 
       pedSize = pedSize + 1
       storage[pedSize] = ped
@@ -82,7 +91,7 @@ local function deletePed(payload)
 
   if payload.target then
     for i = 1, #payload.target do
-      target.removeLocalEntity(payload.entity, payload.target[i]?.name)
+      fzd.target.removeLocalEntity(payload.entity, payload.target[i]?.name)
     end
   end
 
@@ -90,7 +99,7 @@ local function deletePed(payload)
   DeleteEntity(payload.entity)
 end
 
-function peds.removePed(payload)
+function fzd.peds.removePed(payload)
   if not payload.id then
     return
   end
@@ -103,13 +112,17 @@ function peds.removePed(payload)
         deletePed({ entity = ped.spawned, target = ped.target })
       end
 
+      if ped.blip then
+        RemoveBlip(ped.blip)
+      end
+
       table.remove(storage, i)
       break
     end
   end
 end
 
-function peds.setPedCoords(payload)
+function fzd.peds.setPedCoords(payload)
   if not payload.id then
     return
   end
@@ -131,7 +144,7 @@ function peds.setPedCoords(payload)
   end
 end
 
-function peds.getPedById(id)
+function fzd.peds.getPedById(id)
   if not id then
     return
   end
@@ -145,7 +158,7 @@ function peds.getPedById(id)
   end
 end
 
-function peds.removeResourcePed(resource)
+function fzd.peds.removeResourcePed(resource)
   resource = resource or GetInvokingResource() or cache.resource
 
   for i = #storage, 1, -1 do
@@ -199,5 +212,3 @@ CreateThread(function()
     Wait(5000)
   end
 end)
-
-return peds

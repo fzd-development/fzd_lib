@@ -1,6 +1,8 @@
-local notification = {}
+if Config.Notification ~= "ox_lib" then return end
 
-function notification.send(payload)
+fzd.notification = {}
+
+function fzd.notification.send(payload)
   if not payload.title or not payload.description then
     return
   end
@@ -12,5 +14,3 @@ function notification.send(payload)
     duration = payload.duration or 5000
   })
 end
-
-return notification

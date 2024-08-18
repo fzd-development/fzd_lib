@@ -1,20 +1,17 @@
-local config = require "config.shared"
-local bridge = require (("server.bridge.%s"):format(config.framework))
+if Config.Notification ~= "default" then return end
 
-local notification = {}
+fzd.notification = {}
 
-function notification.send(src, title, message, type)
-  if config.framework == "esx" then
+function fzd.notification.send(src, title, message, type)
+  if Config.Framework == "esx" then
     local xPlayer = bridge.getPlayer(src)
     xPlayer.showNotification(message)
   end
 
-  if config.framework == "qbcore" then
+  if Config.Framework == "qb-core" then
     TriggerClientEvent('QBCore:Notify', src, {
       text = title,
       caption = message
     }, type or "primary")
   end
 end
-
-return notification

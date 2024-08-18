@@ -1,15 +1,15 @@
-local target = {}
+if Config.Target ~= "custom" then return end
 
-function target.addLocalEntity(entity, payload)
+fzd.target = {}
 
-end
-
-function target.removeLocalEntity(entity, payload)
+function fzd.target.addLocalEntity(entity, payload)
 
 end
 
-function target.disableTargeting(boolean)
+function fzd.target.removeLocalEntity(entity, payload)
 
 end
 
-return target
+function fzd.target.disableTargeting(boolean)
+
+end

@@ -1,6 +1,8 @@
-local vehiclekeys = {}
+if Config.VehicleKeys ~= "renewed" then return end
 
-function vehiclekeys.isVehicleLocked(vehicle)
+fzd.vehiclekeys = {}
+
+function fzd.vehiclekeys.isVehicleLocked(vehicle)
   local lockedStatus = GetVehicleDoorLockStatus(vehicle)
 
   if lockedStatus == 1 or lockedStatus == 0 then
@@ -12,8 +14,6 @@ function vehiclekeys.isVehicleLocked(vehicle)
   end
 end
 
-function vehiclekeys.giveVehicleKeys(_, plate)
+function fzd.vehiclekeys.giveVehicleKeys(_, plate)
   exports['Renewed-Vehiclekeys']:addKey(plate)
 end
-
-return vehiclekeys

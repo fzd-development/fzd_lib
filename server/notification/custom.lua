@@ -1,7 +1,7 @@
-local notification = {}
+if Config.Notification ~= "custom" then return end
 
-function notification.send(src, title, message, type)
+fzd.notification = {}
+
+function fzd.notification.send(src, title, message, type)
 
 end
-
-return notification

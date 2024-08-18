@@ -1,6 +1,8 @@
-local target = {}
+if Config.Target ~= "qb-target" then return end
 
-function target.addLocalEntity(entity, payload)
+fzd.target = {}
+
+function fzd.target.addLocalEntity(entity, payload)
   for i = 1, #payload do
     local option = payload[i]
 
@@ -17,12 +19,10 @@ function target.addLocalEntity(entity, payload)
   exports["qb-target"]:AddTargetEntity(entity, payload)
 end
 
-function target.removeLocalEntity(entity, payload)
+function fzd.target.removeLocalEntity(entity, payload)
   exports['qb-target']:RemoveTargetEntity(entity, payload)
 end
 
-function target.disableTargeting(boolean)
+function fzd.target.disableTargeting(boolean)
   exports['qb-target']:AllowTargeting(boolean)
 end
-
-return target

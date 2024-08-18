@@ -1,6 +1,8 @@
-local vehiclekeys = {}
+if Config.VehicleKeys ~= "qs-vehiclekeys" then return end
 
-function vehiclekeys.isVehicleLocked(vehicle)
+fzd.vehiclekeys = {}
+
+function fzd.vehiclekeys.isVehicleLocked(vehicle)
   local lockedStatus = exports["qs-vehiclekeys"]:GetDoorState(vehicle)
 
   if lockedStatus == 1 or lockedStatus == 0 then
@@ -12,9 +14,7 @@ function vehiclekeys.isVehicleLocked(vehicle)
   end
 end
 
-function vehiclekeys.giveVehicleKeys(vehicle, plate)
+function fzd.vehiclekeys.giveVehicleKeys(vehicle, plate)
   local model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
   exports['qs-vehiclekeys']:GiveKeys(plate, model, true)
 end
-
-return vehiclekeys

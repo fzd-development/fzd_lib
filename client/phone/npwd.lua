@@ -1,6 +1,8 @@
-local phone = {}
+if Config.Phone ~= "npwd" then return end
 
-function phone.notifaction(app, title, message)
+fzd.phone = {}
+
+function fzd.phone.notifaction(app, title, message)
   exports["npwd"]:createSystemNotification({
     uniqId = "fzd_lib:groups",
     content = message,
@@ -9,5 +11,3 @@ function phone.notifaction(app, title, message)
     duration = 5000
   })
 end
-
-return phone

@@ -1,4 +1,6 @@
-local bridge = {}
+if Config.Framework ~= "esx" then return end
+
+fzd.bridge = {}
 
 local Player = {}
 local Loaded = false
@@ -17,11 +19,11 @@ if not success then
   end
 end
 
-function bridge.getPlayerIdentifier()
+function fzd.bridge.getPlayerIdentifier()
   return Player and Player.identifier
 end
 
-function bridge.sendNotification(payload)
+function fzd.bridge.sendNotification(payload)
   if payload.type == "inform" then
     payload.type = "info"
   end
@@ -63,5 +65,3 @@ RegisterNetEvent('esx:onPlayerLogout', function()
   Player = table.wipe(Player)
   TriggerEvent("fzd_lib:client:playerUnloaded")
 end)
-
-return bridge

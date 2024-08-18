@@ -1,4 +1,6 @@
-local groups = {}
+if Config.Groups ~= "yseries" then return end
+
+fzd.groups = {}
 
 lib.callback.register("fzd_lib:getCurrentStage", function()
   local group = exports["yseries"]:FindGroupByMember(source)
@@ -15,36 +17,34 @@ lib.callback.register("fzd_lib:getCurrentStage", function()
   return currentStage
 end)
 
-function groups.getGroupByMember(member)
+function fzd.groups.getGroupByMember(member)
   return exports["yseries"]:FindGroupByMember(member)
 end
 
-function groups.getGroupMembers(group)
+function fzd.groups.getGroupMembers(group)
   return exports["yseries"]:GetGroupMembers(group)
 end
 
-function groups.setJobStatus(group, _, status)
+function fzd.groups.setJobStatus(group, _, status)
   exports["yseries"]:SetJobStatus(group, status)
 end
 
-function groups.getGroupStages(group)
+function fzd.groups.getGroupStages(group)
   return exports["yseries"]:GetJobStatus(group)
 end
 
-function groups.createBlipForGroup(group, name, blip)
+function fzd.groups.createBlipForGroup(group, name, blip)
   exports["yseries"]:CreateBlipForGroup(group, name, blip)
 end
 
-function groups.removeBlipForGroup(group, name)
+function fzd.groups.removeBlipForGroup(group, name)
   exports["yseries"]:RemoveBlipForGroup(group, name)
 end
 
-function groups.notifyGroup(group, message, type)
+function fzd.groups.notifyGroup(group, message, type)
   exports["yseries"]:NotifyGroup(group, message)
 end
 
-function groups.pNotifyGroup(group, title, message)
+function fzd.groups.pNotifyGroup(group, title, message)
   exports["yseries"]:NotifyGroup(group, message)
 end
-
-return groups

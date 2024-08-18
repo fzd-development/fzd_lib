@@ -1,11 +1,11 @@
-local phone = {}
+if Config.Phone ~= "lp-phone" then return end
 
-function phone.notifaction(app, title, message)
+fzd.phone = {}
+
+function fzd.phone.notifaction(app, title, message)
   exports['lb-phone']:SendNotification({
     app = app or nil,
     title = title or nil,
     content = message,
   })
 end
-
-return phone

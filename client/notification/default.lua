@@ -1,9 +1,8 @@
-local config = require "config.shared"
-local bridge = require (("client.bridge.%s"):format(config.framework))
+if Config.Notification ~= "default" then return end
 
-local notification = {}
+fzd.notification = {}
 
-function notification.send(payload)
+function fzd.notification.send(payload)
   if not payload.title or not payload.description then
     return
   end
@@ -15,5 +14,3 @@ function notification.send(payload)
     duration = payload.duration or 5000
   })
 end
-
-return notification

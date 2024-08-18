@@ -1,8 +1,6 @@
-local config = require("config.shared")
-local notifaction = require (("client.notification.%s"):format(config.notification))
-local phone = require("client.phone.%s"):format(config.phone)
+if Config.Groups ~= "ps-playergroups" then return end
 
-local groups = {}
+fzd.groups = {}
 
 RegisterNetEvent("fzd_lib:notifyGroup", function(title, message)
   notifaction.send({
@@ -15,7 +13,7 @@ RegisterNetEvent("fzd_lib:pNotifyGroup", function(app, title, message)
   phone.notifaction(app, title, message)
 end)
 
-function groups.isInGroup()
+function fzd.groups.isInGroup()
   local inGroup = exports["ps-playergroups"]:GetGroupID()
 
   if inGroup == 0 then
@@ -25,7 +23,7 @@ function groups.isInGroup()
   return true
 end
 
-function groups.isGroupLeader()
+function fzd.groups.isGroupLeader()
   local isLeader = exports["ps-playergroups"]:IsGroupLeader()
 
   if not isLeader then
@@ -35,8 +33,6 @@ function groups.isGroupLeader()
   return true
 end
 
-function groups.getCurrentStage()
+function fzd.groups.getCurrentStage()
   return lib.callback.await("fzd_lib:getCurrentStage", false)
 end
-
-return groups

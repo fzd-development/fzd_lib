@@ -1,13 +1,13 @@
-local bridge = {}
+if Config.Framework ~= "custom" then return end
+
+fzd.bridge = {}
 
 local Player = {}
 
-function bridge.getPlayerIdentifier()
+function fzd.bridge.getPlayerIdentifier()
   return Player and Player.identifier
 end
 
-function bridge.sendNotification(payload)
+function fzd.bridge.sendNotification(payload)
   return Player and Player.identifier
 end
-
-return bridge

@@ -1,4 +1,6 @@
-local bridge = {}
+if Config.Framework ~= "esx" then return end
+
+fzd.bridge = {}
 
 local success, ESX = pcall(function()
   return exports['es_extended']:getSharedObject()
@@ -12,11 +14,11 @@ end
 
 local Players = {}
 
-function bridge.getJob(src)
+function fzd.bridge.getJob(src)
   return Players[src] and Players[src].job
 end
 
-function bridge.hasJob(src, job, grade)
+function fzd.bridge.hasJob(src, job, grade)
   local Player = Players[src]
 
   if not Player then
@@ -26,19 +28,29 @@ function bridge.hasJob(src, job, grade)
   return Player.job.name == job and Player.job.grade >= grade
 end
 
-function bridge.getPlayer(src)
+function fzd.bridge.getPlayer(src)
   return Players[src]
 end
 
-function bridge.getPlayerIdentifier(src)
+function fzd.bridge.getPlayerFromIdentifier(identifier)
+  for _, Player in pairs(Players) do
+    if Player.identifier == identifier then
+      return Player
+    end
+  end
+
+  return false
+end
+
+function fzd.bridge.getPlayerIdentifier(src)
   return Players[src] and Players[src].identifier or false
 end
 
-function bridge.getFullName(src)
+function fzd.bridge.getFullName(src)
   return Players[src] and Players[src].name or false
 end
 
-function bridge.getMoney(src, type)
+function fzd.bridge.getMoney(src, type)
   local xPlayer = ESX.GetPlayerFromId(src)
 
   if not xPlayer then
@@ -48,7 +60,7 @@ function bridge.getMoney(src, type)
   return xPlayer.getAccount(type).money
 end
 
-function bridge.addMoney(src, amount, type, reason)
+function fzd.bridge.addMoney(src, amount, type, reason)
   local xPlayer = ESX.GetPlayerFromId(src)
 
   if not xPlayer then
@@ -62,7 +74,7 @@ function bridge.addMoney(src, amount, type, reason)
   xPlayer.addAccountMoney(type, amount, reason)
 end
 
-function bridge.removeMoney(src, amount, type, reason)
+function fzd.bridge.removeMoney(src, amount, type, reason)
   local xPlayer = ESX.GetPlayerFromId(src)
 
   if not xPlayer then
@@ -103,7 +115,8 @@ local function updatePlayerData(src)
     },
 
     identifier = xPlayer.identifier,
-    name = xPlayer.name
+    name = xPlayer.name,
+    source = PlayerData.source
   }
 end
 
@@ -134,5 +147,3 @@ AddEventHandler('playerDropped', function()
     Players[source] = nil
   end
 end)
-
-return bridge

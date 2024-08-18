@@ -1,6 +1,8 @@
-local groups = {}
+if Config.Groups ~= "slrn_groups" then return end
 
-function groups.isInGroup()
+fzd.groups = {}
+
+function fzd.groups.isInGroup()
   local inGroup = lib.callback.await("fzd_lib:isInGroup", false)
 
   if not inGroup then
@@ -10,7 +12,7 @@ function groups.isInGroup()
   return true
 end
 
-function groups.isGroupLeader()
+function fzd.groups.isGroupLeader()
   local isLeader = lib.callback.await("fzd_lib:isGroupLeader", false)
 
   if not isLeader then
@@ -20,8 +22,6 @@ function groups.isGroupLeader()
   return true
 end
 
-function groups.getCurrentStage()
+function fzd.groups.getCurrentStage()
   return lib.callback.await("fzd_lib:getCurrentStage", false)
 end
-
-return groups
